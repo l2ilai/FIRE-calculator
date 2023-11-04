@@ -17,7 +17,7 @@ public class Main {
         }
 
         //Рассчитываем
-        calc.getWithdrawalPercentage();
+        calc.calcWithdrawalPercentage();
 
         //Выводим на экран
         System.out.println(calc.getMaxWithdrawalPercentage());

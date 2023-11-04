@@ -21,7 +21,7 @@ public class Calculate {
     }
 
     //Вычесление максмального процента изъятия
-    protected void getWithdrawalPercentage () {
+    protected void calcWithdrawalPercentage () {
         double capitalCurrentYear;                                   //вход
         double remainingCapital;                                     //отстаток
         double incomeCapital;                                        //доход
