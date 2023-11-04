@@ -16,7 +16,7 @@ public class Calculate {
         }
     }
 
-    public double getMaxWithdrawalPercentage() {
+    protected double getMaxWithdrawalPercentage() {
         return maxWithdrawalPercentage;
     }
 
