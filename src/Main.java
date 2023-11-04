@@ -1,5 +1,5 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws YearException {
 
         Welcome welcome = new Welcome();
         InputValue value = new InputValue();
@@ -9,11 +9,7 @@ public class Main {
         welcome.printWelcome();
 
         //Вводим данные с клавиатуры
-        try {
-            value.setValueYear();
-        } catch (YearException e) {
-            e.printStackTrace();
-        }
+        value.setValueYear();
 
         //Рассчитываем и выводим результат
         System.out.println(calc.calcMaxWithdrawalPercentage());
