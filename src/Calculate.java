@@ -1,29 +1,32 @@
 public class Calculate {
     private static int year;
     private static final int START_CAPITAL= 1_000;              //стартовый капитал
+    private double maxWithdrawalPercentage = 100;                //максимальный процент изъятия
     double[] inflation_rate = Constants.INFLATION_RATE;         //процент инфляции
     double[] moex_rate = Constants.MOEX_RATE;                   //индекс биржи
-    double[] revenue_share = new double[moex_rate.length - 1];   //доля дохода
+    protected double[] revenue_share = new double[moex_rate.length - 1];   //доля дохода
     protected void setYear (int year) {
         Calculate.year = year;
     }
 
     //Вычесление долей дохода за все года
-    public void getRevenueShare() {
+    private void getRevenueShare() {
         for (int i = 0; i < moex_rate.length - 1; i++) {
             revenue_share[i] = (moex_rate[i + 1] - moex_rate[i]) / moex_rate[i];
         }
     }
 
-    //Вычесление максмального процента изъятия
-    public double getWithdrawalPercentage () {
+    public double getMaxWithdrawalPercentage() {
+        return maxWithdrawalPercentage;
+    }
 
-        double maxWithdrawalPercentage = 100;                        //максимальный процент изъятия
+    //Вычесление максмального процента изъятия
+    protected void getWithdrawalPercentage () {
         double capitalCurrentYear;                                   //вход
         double remainingCapital;                                     //отстаток
-        double withdrawalCapitalBeginningYear = 0;                   //изымание в начале года
         double incomeCapital;                                        //доход
         double withdrawalCapitalEndYear;                             //изымания в следующем году
+        double withdrawalCapitalBeginningYear = 0;                   //изымание в начале года
 
         getRevenueShare();
 
@@ -53,6 +56,5 @@ public class Calculate {
                 }
             }
         }
-        return maxWithdrawalPercentage;
     }
 }

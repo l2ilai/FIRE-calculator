@@ -16,8 +16,11 @@ public class Main {
             System.exit(1);
         }
 
-        //Рассчитываем и выводим на экран
-        System.out.println(calc.getWithdrawalPercentage());
+        //Рассчитываем
+        calc.getWithdrawalPercentage();
+
+        //Выводим на экран
+        System.out.println(calc.getMaxWithdrawalPercentage());
 
     }
 }
