@@ -13,14 +13,10 @@ public class Main {
             value.setValueYear();
         } catch (YearException e) {
             e.printStackTrace();
-            System.exit(1);
         }
 
-        //Рассчитываем
-        calc.calcWithdrawalPercentage();
-
-        //Выводим на экран
-        System.out.println(calc.getMaxWithdrawalPercentage());
+        //Рассчитываем и выводим результат
+        System.out.println(calc.calcMaxWithdrawalPercentage());
 
     }
 }
