@@ -34,34 +34,40 @@ public class Calculate {
                 - 2] / 100) + withdrawalCapitalCurrentYear;
     }
 
-    //Вычесление максмального процента изъятия
-    protected double calcMaxWithdrawalPercentage () {
-        double capitalCurrentYear;                         //капитал текуцего года
-        double maxWithdrawalPercentage = 100;              //максимальный процент изъятия
+    //Поиск минимального кипатала при текущем  проценте изъятия
+    private boolean isMinCapitalCurrentYear (double currentWithdrawalPercentage) {
+        double capitalCurrentYear;                      //капитал текуцего года
         double remainingCapital;                           //отстаток текучего года
         double withdrawalCapitalNextYear;              //изымания в следующем году с учётом инфляции
+
+        capitalCurrentYear = START_CAPITAL;
+        //изымание в начале первого года
+        withdrawalCapitalNextYear = calcWithdrawalCapitalStartingYear(currentWithdrawalPercentage,capitalCurrentYear);
+        for (int currentYear = year; currentYear <= 2021; currentYear++) {
+
+            //остаток текучего года
+            remainingCapital = capitalCurrentYear - withdrawalCapitalNextYear;
+
+            //доход за текущий год
+            capitalCurrentYear = calcIncomeCapital(remainingCapital, currentYear);
+
+            //изымания в следующем году с учётом инфляции
+            withdrawalCapitalNextYear = calcWithdrawalCapitalCurrentYear(withdrawalCapitalNextYear, currentYear);
+
+        }
+        return capitalCurrentYear < 0;
+    }
+
+    //Вычесление максмального процента изъятия
+    protected double calcMaxWithdrawalPercentage () {
+        double maxWithdrawalPercentage = 100;              //максимальный процент изъятия
 
         if (year == 2021) {
             return maxWithdrawalPercentage;
         }
         for (double currentWithdrawalPercentage = 0.5; maxWithdrawalPercentage > currentWithdrawalPercentage; currentWithdrawalPercentage += 0.5) {
-            capitalCurrentYear = START_CAPITAL;
 
-            //изымание в начале первого года
-            withdrawalCapitalNextYear = calcWithdrawalCapitalStartingYear(currentWithdrawalPercentage,capitalCurrentYear);
-            for (int currentYear = year; currentYear <= 2021; currentYear++) {
-
-                //остаток текучего года
-                remainingCapital = capitalCurrentYear - withdrawalCapitalNextYear;
-
-                //доход за текущий год
-                capitalCurrentYear = calcIncomeCapital(remainingCapital, currentYear);
-
-                //изымания в следующем году с учётом инфляции
-                withdrawalCapitalNextYear = calcWithdrawalCapitalCurrentYear(withdrawalCapitalNextYear, currentYear);
-            }
-
-            if (capitalCurrentYear < withdrawalCapitalNextYear && capitalCurrentYear < 0) {
+            if (isMinCapitalCurrentYear (currentWithdrawalPercentage)) {
                 maxWithdrawalPercentage = currentWithdrawalPercentage - 0.5;
             }
         }
