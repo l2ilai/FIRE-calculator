@@ -1,9 +1,18 @@
+import java.util.Scanner;
 public class Calculate {
     private int year;
+    public void setValueYear() throws YearException {
 
-    //private static final int START_CAPITAL= 1_000;              //стартовый капитал
-    protected void setYear(int year) {
-        this.year = year;
+        //Принимём данных с клавиатуры и преобразорвание в целое число
+        try {
+            String scanner = new Scanner(System.in).nextLine();
+            year = Integer.parseInt(scanner);
+            if (!(year >= 2002 & year <= 2021)) {
+                throw new YearException("Year should be from 2002 to 2021 inclusive");
+            }
+        } catch (NumberFormatException e) {
+            throw new YearException("String is incorrect ", e);
+        }
     }
 
     //Вычесление массива долей дохода за все года
