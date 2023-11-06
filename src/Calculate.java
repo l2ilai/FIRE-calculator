@@ -1,6 +1,8 @@
 import java.util.Scanner;
+
 public class Calculate {
     private int year;
+
     public void setValueYear() throws YearException {
 
         //Принимём данных с клавиатуры и преобразорвание в целое число
