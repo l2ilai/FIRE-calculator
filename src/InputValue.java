@@ -14,7 +14,7 @@ public class InputValue {
             }
             inputYear.setYear(year);
         } catch (NumberFormatException e) {
-            throw new YearException("String is incorrect ",e);
+            throw new YearException("String is incorrect ", e);
         }
     }
 }
