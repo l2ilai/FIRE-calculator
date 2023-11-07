@@ -4,10 +4,9 @@ public class Calculate {
     private int year;
     private final int MIN_INPUT_YEAR = 2002;
     private final int MAX_INPUT_YEAR = 2021;
+
+    //Принимём данных с клавиатуры и преобразорвание в целое число
     public void setValueYear() throws YearException {
-
-
-        //Принимём данных с клавиатуры и преобразорвание в целое число
         try {
             String scanner = new Scanner(System.in).nextLine();
             year = Integer.parseInt(scanner);
@@ -66,7 +65,6 @@ public class Calculate {
 
             //изымания в следующем году с учётом инфляции
             withdrawalCapitalNextYear = calcWithdrawalCapitalCurrentYear(withdrawalCapitalNextYear, indexArrayInputYear);
-
             indexArrayInputYear += 1;
         }
         return capitalCurrentYear < 0;
